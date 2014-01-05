@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <title>Seleasy Test Site</title>
+  </head>
+  <body>
+    <header>
+      <h1>Seleasy Test Site</h1>
+      <nav>
+        <ul>
+          <li>
+            <a href="{{ url_for('menu_link') }}">Menu Link 1</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <form action="" method="post" accept-charset="utf-8">
+      <fieldset>
+        <legend>Simple form</legend>
+        <div>
+          Name
+        </div>
+        <input type="text" name="name"/>
+
+        <div>
+          Message
+        </div>
+        <input type="text" name="message"/>
+        <div>
+          <button type="submit">Submit</button>
+        </div>
+      </fieldset>
+    </form>
+  </body>
+</html>
