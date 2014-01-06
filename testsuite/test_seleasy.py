@@ -10,7 +10,7 @@ from mock import Mock
 path = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(path, '..'))
 
-from seleasy import Seleasy, SmartElementSet
+from seleasy import Seleasy, SmartElementSet, NoElementsError
 
 
 WEBSERVER_ADDRESS = 'http://127.0.0.1:5000/'
@@ -54,10 +54,10 @@ class SeleasyTest(unittest.TestCase):
     def test_element_not_found_not_throw_error(self):
         expect(len(self.seleasy('a.notfound'))) == 0
 
-    @unittest.skip('implement later')
     def test_call_action_in_an_empty_set(self):
-        with expect.raises(StandardError):
-            self.seleasy('a.notfound').click()
+        selector = 'a.notfound'
+        with expect.raises(NoElementsError, "Can not find any element for selector '%s'" % selector):
+            self.seleasy(selector).click()
 
     def test_click_link_with_content(self):
         self.get('/')
@@ -96,7 +96,7 @@ class SmartElementSetTest(unittest.TestCase):
 
         self.elements = [self.element1, self.element2, self.element3]
 
-        self.smartset = SmartElementSet(self.elements)
+        self.smartset = SmartElementSet('*', self.elements)
 
     def test_always_delegate_calls_to_first_element(self):
         self.smartset.click()
