@@ -13,7 +13,7 @@ sys.path.append(os.path.join(path, '..'))
 from seleasy import Seleasy, SmartElementSet, NoElementsError
 
 
-WEBSERVER_ADDRESS = 'http://127.0.0.1:5000/'
+WEBSERVER_ADDRESS = 'http://127.0.0.1:5000'
 
 
 class SeleasyTest(unittest.TestCase):
@@ -73,7 +73,6 @@ class SeleasyTest(unittest.TestCase):
 
         expect(button.text) == 'Clicked!'
 
-    @unittest.skip('need to match content with attribute value')
     def test_click_input_type_button_with_content(self):
         self.get('/')
 
@@ -81,7 +80,7 @@ class SeleasyTest(unittest.TestCase):
 
         button = self.browser.find_element_by_id('click-me-input')
 
-        expect(button.text) == 'Clicked too!'
+        expect(button.get_attribute('value')) == 'Clicked too!'
 
     def get(self, uri):
         self.browser.get('%s%s' % (WEBSERVER_ADDRESS, uri))
