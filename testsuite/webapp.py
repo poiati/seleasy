@@ -9,7 +9,7 @@ def index():
 
 @app.route('/menu-link')
 def menu_link():
-    return 'Menu Link'
+    return 'Menu Link Clicked'
 
 if __name__ == '__main__':
     app.run(debug=True)
