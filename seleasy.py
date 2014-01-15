@@ -10,16 +10,22 @@ class Seleasy(object):
     def __init__(self, driver):
         self._driver = driver
 
-    def __call__(self, selector='a, button, input', content=None):
+    def fill(self, name, value):
+        self._driver.find_element_by_name(name).send_keys(value)
+
+    def click(self, text):
+        self(text=text).click()
+
+    def __call__(self, selector='a, button, input', text=None):
         elements = self._driver.find_elements_by_css_selector(selector)
-        if content is not None:
-            elements = filter(self._content_filter(content), elements)
+        if text is not None:
+            elements = filter(self._text_filter(text), elements)
         return SmartElementSet(selector, elements)
 
-    def _content_filter(self, content):
+    def _text_filter(self, text):
         def fn(element):
-            element_content = element.get_attribute('value') or element.text
-            return element_content.strip() == content
+            element_text = element.get_attribute('value') or element.text
+            return element_text.strip() == text
         return fn
 
 

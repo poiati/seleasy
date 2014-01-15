@@ -59,28 +59,57 @@ class SeleasyTest(unittest.TestCase):
         with expect.raises(NoElementsError, "Can not find any element for selector '%s'" % selector):
             self.seleasy(selector).click()
 
-    def test_click_link_with_content(self):
+    def test_click_link_with_text(self):
         self.get('/')
 
-        self.seleasy(content='Menu Link 1').click()
+        self.seleasy(text='Menu Link 1').click()
 
-    def test_click_button_with_content(self):
+    def test_form_submit_selenium(self):
         self.get('/')
 
-        self.seleasy(content='Click me!').click()
+        name_input = self.browser.find_element_by_name('name')
+        name_input.send_keys('Peter')
+
+        message_input = self.browser.find_element_by_name('message')
+        message_input.send_keys('Hello World!')
+
+        submit_button = self.browser.find_element_by_id('submit-form')
+        submit_button.click()
+
+        expect(self.browser.page_source).contains('Peter sent Hello World!')
+
+    def test_click_button_with_text(self):
+        self.get('/')
+
+        self.seleasy(text='Click me!').click()
 
         button = self.browser.find_element_by_id('click-me-button')
-
         expect(button.text) == 'Clicked!'
 
-    def test_click_input_type_button_with_content(self):
+    def test_click_input_type_button_with_text(self):
         self.get('/')
 
-        self.seleasy(content='Click me too!').click()
+        self.seleasy(text='Click me too!').click()
 
         button = self.browser.find_element_by_id('click-me-input')
-
         expect(button.get_attribute('value')) == 'Clicked too!'
+
+    def test_click_shortcut(self):
+        self.get('/')
+
+        self.seleasy.click('Click me!')
+
+        button = self.browser.find_element_by_id('click-me-button')
+        expect(button.text) == 'Clicked!'
+
+    def test_form_fill_shortcut(self):
+        self.get('/')
+
+        self.seleasy.fill('name', 'Peter')
+        self.seleasy.fill('message', 'Hello World!')
+
+        submit_button = self.browser.find_element_by_id('submit-form')
+        submit_button.click()
 
     def get(self, uri):
         self.browser.get('%s%s' % (WEBSERVER_ADDRESS, uri))

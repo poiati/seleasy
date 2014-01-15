@@ -17,20 +17,19 @@
         </ul>
       </nav>
     </header>
-    <form action="" method="post" accept-charset="utf-8">
+    <form action="{{ url_for('submit') }}" method="post" accept-charset="utf-8">
       <fieldset>
         <legend>Simple form</legend>
         <div>
           Name
         </div>
         <input type="text" name="name"/>
-
         <div>
           Message
         </div>
-        <input type="text" name="message"/>
+        <textarea name="message"></textarea>
         <div>
-          <button type="submit">Submit</button>
+          <button type="submit" id="submit-form">Submit</button>
         </div>
       </fieldset>
     </form>
