@@ -1,3 +1,15 @@
+"""
+Seleasy is an alternative to the classic python Selenium API. It's more simple
+and easy to learn.
+"""
+
+
+__version__ = '0.1.0'
+__author__ = 'Paulo Poiati'
+__license__ = 'MIT'
+__copyright__ = 'Copyright 2014 Paulo Poiati'
+
+
 class NoElementsError(Exception):
 
     def __init__(self, selector):
