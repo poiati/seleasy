@@ -2,3 +2,4 @@ Flask==0.10.1
 selenium==2.39.0
 expecter==0.2.2
 mock==1.0.1
+Sphinx==1.2

@@ -32,6 +32,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li><a href="#">seleasy 0.1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
@@ -43,11 +46,81 @@
             
   <div class="section" id="welcome-to-seleasy-s-documentation">
 <h1>Welcome to seleasy&#8217;s documentation!<a class="headerlink" href="#welcome-to-seleasy-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>Contents:</p>
 <div class="toctree-wrapper compound">
 <ul class="simple">
 </ul>
 </div>
+<span class="target" id="module-seleasy"></span><p>Seleasy is an alternative to the classic python Selenium API. The main advantage
+of it is a clear and less verbose inteface.</p>
+<dl class="class">
+<dt id="seleasy.Seleasy">
+<em class="property">class </em><tt class="descclassname">seleasy.</tt><tt class="descname">Seleasy</tt><big>(</big><em>driver</em><big>)</big><a class="headerlink" href="#seleasy.Seleasy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main interface of seleasy.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>driver</strong> &#8211; A selenium WebDriver instance, for example:</td>
+</tr>
+</tbody>
+</table>
+<p>selenium.webdriver.Firefox</p>
+<p>Instances of this class are callable and
+can be used to query for elements in the document using css selectors.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">seleasy</span><span class="p">(</span><span class="s">&#39;.clients-tables&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="s">&#39;Peter Parker&#39;</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">text</span>
+</pre></div>
+</div>
+<p>You can call selenium methods at the matching elements.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">seleasy</span><span class="p">(</span><span class="s">&#39;button#send-form&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>If the css selector match more than one element the underlying action will 
+go to the first element of the matches.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">seleasy</span><span class="p">(</span><span class="s">&#39;form input[type=text]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="s">&#39;Fill the first input element of the form&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="seleasy.Seleasy.click">
+<tt class="descname">click</tt><big>(</big><em>text</em><big>)</big><a class="headerlink" href="#seleasy.Seleasy.click" title="Permalink to this definition">¶</a></dt>
+<dd><p>Click in a button that contains text.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>text</strong> &#8211; The button text</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">seleasy</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="s">&#39;Submit&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="seleasy.Seleasy.fill">
+<tt class="descname">fill</tt><big>(</big><em>name</em>, <em>value</em><big>)</big><a class="headerlink" href="#seleasy.Seleasy.fill" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fill a form input.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> &#8211; The input name</li>
+<li><strong>value</strong> &#8211; The input new value</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">seleasy</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;Peter Parker&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">seleasy</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s">&#39;password&#39;</span><span class="p">,</span> <span class="s">&#39;spiderweb&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
@@ -100,6 +173,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li><a href="#">seleasy 0.1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>

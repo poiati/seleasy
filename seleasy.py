@@ -1,6 +1,6 @@
 """
-Seleasy is an alternative to the classic python Selenium API. It's more simple
-and easy to learn.
+Seleasy is an alternative to the classic python Selenium API. The main advantage
+of it is a clear and less verbose inteface.
 """
 
 
@@ -18,14 +18,52 @@ class NoElementsError(Exception):
 
 
 class Seleasy(object):
+    """
+    Main interface of seleasy. 
+
+    :param driver: A selenium WebDriver instance, for example: 
+    selenium.webdriver.Firefox
+
+    Instances of this class are callable and
+    can be used to query for elements in the document using css selectors.
+
+    >>> table = seleasy('.clients-tables')
+    >>> assert 'Peter Parker' in table.text
+
+    You can call selenium methods at the matching elements.
+
+    >>> seleasy('button#send-form').click()
+
+    If the css selector match more than one element the underlying action will 
+    go to the first element of the matches.
+
+    >>> seleasy('form input[type=text]').send_keys('Fill the first input element of the form')
+
+    """
 
     def __init__(self, driver):
         self._driver = driver
 
     def fill(self, name, value):
+        """
+        Fill a form input.
+
+        :param name: The input name
+        :param value: The input new value
+
+        >>> seleasy.fill('name', 'Peter Parker')
+        >>> seleasy.fill('password', 'spiderweb')
+        """
         self._driver.find_element_by_name(name).send_keys(value)
 
     def click(self, text):
+        """
+        Click in a button that contains text.
+
+        :param text: The button text
+
+        >>> seleasy.click('Submit')
+        """
         self(text=text).click()
 
     def __call__(self, selector='a, button, input', text=None):
